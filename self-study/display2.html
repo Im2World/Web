@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>display2</title>
+        <!-- 2022.05.30 -->
+</head>
+<body>
+  <style>
+    .relative{
+      position: relative;
+      width: 200px;
+      height: 130px;
+      background-color:pink;
+      border-color: coral;
+      border-style: solid;
+      border-width: 3px;
+    }
+
+    .absolute{
+      position: absolute;
+      width: 70px;
+      height: 70px;
+      background-color:yellow;
+      border-color: cornflowerblue;
+      border-style: solid;
+      border-width: 3px;
+    }
+  </style>
+
+<!-- relative안에 absolute -->
+<div class="relative">
+  <div class="absolute">absolute</div>
+</div>
+
+<!-- absolute -->
+<!-- 부모요소가 없으면, body에서 static이 아닌 position기준으로 이동 -->
+<!-- body의 position이 static이라 무효 -->
+<div class="absolute">absolute</div>
+</body>
+</html>
