@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>display_block</title>
+      <!-- 2022.05.30 -->
+</head>
+<body>
+  <style>
+    /* block */
+    .div_block{
+      display: block;
+      width: 130px;
+      height: 130px;
+      background-color:yellowgreen;
+      border-style: solid;
+      border-color:tomato;   /* 테두리 색상 */
+      border-width: 2px;    /* 테두리 두께 */
+    }
+
+    /* inline */
+    .div_inline{
+      display: inline;
+      width: 150px;    /*width, height 조절 불가*/
+      height: 150px;    /*width, height 조절 불가*/
+      background-color: pink;
+    }
+
+    .div_inline2{
+      display: inline;
+      background-color:aqua;
+    }
+
+    .div_inline3{
+      display: inline;
+      background-color:coral;
+    }
+
+    /* inlie-block */
+    .div_inline_block1{
+      display:inline-block;
+      background-color:coral;    
+    }
+
+    .div_inline_block2{
+      display:inline-block;
+      background-color: pink;  
+    }
+
+    .div_inline_block3{
+      display:inline-block;
+      background-color:aqua;    
+    }
+  </style>
+
+  <!-- display : block -->
+  <div class="div_block">display: block1 </div>
+  <div class="div_block">display: block2 </div>
+  <br>
+  <!-- display : inline -->
+  <div class="div_inline">display: inline1 </div>
+  <div class="div_inline2">display: inline2 </div>
+  <div class="div_inline3">display: inline3 </div>
+  <br>
+  <br>
+  <!-- display : inline-block -->
+  <div class="div_inline_block1">inline block1</div>
+  <div class="div_inline_block2">inline block1</div>
+  <div class="div_inline_block3">inline block1</div>
+</body>
+</html>
