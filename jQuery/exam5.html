@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>실습5</title>
+
+  <!-- 2022.06.02.목 -->
+  <!-- 오후 실습2 - form-->
+  <!-- 확인 옆 체크박스가 체크되면 모두선택, 체크안되면  -->
+  <!-- jquery 스크립트 import : load하는 순간 용량을 288kbyte정도 소모한다. 그래서 jquery 사용하지 않으려는 움직임이 발생. -->
+  <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+
+</head>
+<body>
+  <!-- 7*3 table생성 -->
+  <!-- 태그 빠르게 생성하는 꿀팁 : table>tr*7>td*3 -->
+  <style>
+    /* 여러개 묶어서 스타일 지정할 때는 콤마 사용 */
+    table, tr, th, td{
+      border: 1px black solid;      /*테두리 두께, 색, 디자인*/
+    }
+
+    table{
+      width: 600px;
+      text-align: center;      
+    }
+
+    tr{
+      width: 300px;
+    }
+
+    #chk{
+      width: 70px;
+      text-align: center;
+    }
+
+    #td2{
+      width: 200px;
+    }
+
+    #td3{
+      width: 100px;
+    }
+  </style>
+  <table cellspacing="0px" cellpadding="5px">
+    <!-- 제목 -->
+    <tr id="tr">
+      <th>
+        <input type="checkbox" name="all" id="all">확인
+      </th>
+      <th>제목</th>
+      <th>글쓴시간</th>
+    </tr>
+    <!-- 동일한 name을 부여, selector한번에 사용 -->
+    <tr>
+      <td id="chk"><input type="checkbox" name="chk"></td>
+      <td id="td2">111</td>
+      <td id="td3">13:12:01</td>
+    </tr>
+    <tr>
+      <td id="chk"><input type="checkbox" name="chk"></td>
+      <td id="td2">222</td>
+      <td id="td3">13:12:02</td>
+    </tr>
+    <tr>
+      <td id="chk"><input type="checkbox" name="chk"></td>
+      <td id="td2">333</td>
+      <td id="td3">13:12:03</td>
+    </tr>
+    <tr>
+      <td id="chk"><input type="checkbox" name="chk"></td>
+      <td id="td2">444</td>
+      <td id="td3">13:12:04</td>
+    </tr>
+    <tr>
+      <td id="chk"><input type="checkbox" name="chk"></td>
+      <td id="td2">555</td>
+      <td id="td3">13:12:05</td>
+    </tr>
+    <tr>
+      <td id="chk"><input type="checkbox" name="chk"></td>
+      <td id="td2">666</td>
+      <td id="td3">13:12:06</td>
+    </tr>
+  </table>
+
+  <div>
+    <input id="log_button" type="button" value="로그">
+  </div>
+
+
+<script>
+
+  //확인 옆 체크박스 선택하면 전체 체크 또는 해제
+  $('#all').click(function(){
+    //체크된 체크박스의 개수
+    //input태그 중 타입이 checkbox인 것중 name이 chk이면서 checked된 상태인 것의 개수(length)
+    let $checkBoxes = $('input:checkbox[name=chk]:checked').length;
+
+    //체크박스가 하나도 체크되어있지 않은 상태에서
+    if($checkBoxes === 0){
+      $('input:checkbox[name=chk]').prop("checked",true);
+      console.log('전체 체크');
+    } else{
+      $('input:checkbox[name=chk]').prop("checked",false);
+      console.log('전체 체크해제');
+    }
+  });
+
+  ///////////////////체크박스//////////////////
+  // id log_button을 클릭하면, 함수발동
+
+  $('#log_button').click(function(){
+    // input 태그 중에 checkbox 타입 중에 name 이 chk 인 것만 log에 출력
+    let $checkBoxes = $('input:checkbox[name=chk]');
+    console.log(`체크박스 수 : ${$checkBoxes.length}`);   //백틱 주의!
+
+    //체크된 것만 골라라
+    console.log($('input:checkbox[name=chk]:checked').length);
+
+    // name이 chk 인 체크박스의 속성 checked 를 붙여라 (전체 선택)
+    // $('input[name=chk]:checkbox').prop('checked', true);
+
+
+    // 체크된 것이 있는지? _ 체크된 것 1개 이상이라면
+    if ($('input:checkbox[name=chk]:checked').length > 0) {
+      console.log('체크된 것 있나');
+    }
+
+  ///////////체크박스2////////////
+  //내부 순환 _ checkbox 개수 만큼 checkbox들을 하나씩 확인.
+  //#####전체 체크 순회#######
+  let checkedSize = 0;    //체크 개수 카운트 변수
+
+  $('input[name=chk]:checkbox').each(function(){
+    // console.log('개수반환');
+    // console.log(this);
+    // this.checked = true;
+
+    // console.log($(this));    //this를 제이쿼리 객체로 전환
+    // $(this).prop('checked', true);
+
+    //######개별 체크 여부 확인#######
+    //중간에 조건줘서 특정 것만 check하려면 for문, foreach문 사용
+    // this checked = true;
+    // 'input[name=chk]:checkbox' 는 this
+    //'input[name=chk]:checkbox'가 체크상태라면, 카운트 1증가
+    if ($(this).is(':checked') > 0) {
+      checkedSize++;
+      console.log(checkedSize);
+      console.log($('td2'));    //#td2//////////HELP///////////
+    }
+  });
+
+    // 위와 동일한 코드
+    // for (let i = 0; i < $('input[name=chk]:checkbox').length; i++) {
+    //   let $checkBox = $('input[name=chk]:checkbox')[i];
+    //   $checkBox.checked = true;
+    // }
+
+    //체크표시가 하나도 없다면, 선택없음 알림창 띄움
+    if(checkedSize === 0){
+      alert('선택 없음');
+    }
+});     //close => $('#log_button').click(function()
+</script>
+</body>
+</html>
