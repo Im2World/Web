@@ -11,10 +11,8 @@
   <!-- 조건 : 확인 옆 체크박스가 체크되면 모두선택, 체크안되면 모두해제 -->
   <!-- jquery 스크립트 import -->
   <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
-
 </head>
 <body>
-  <!-- 7*3 table생성 -->
   <!-- 태그 빠르게 생성하는 꿀팁 : table>tr*7>td*3 -->
   <style>
     /* 여러개 묶어서 스타일 지정할 때는 콤마 사용 */
@@ -37,6 +35,12 @@
     }
     #td3{
       width: 100px;
+    }
+    #log_button{
+      position: absolute;
+      width: 100px;
+      height: 40px;
+      left: 508px;
     }
   </style>
   <table cellspacing="0px" cellpadding="5px">
@@ -83,8 +87,6 @@
   <div>
     <input id="log_button" type="button" value="로그">
   </div>
-
-
 <script>
   //확인 옆 체크박스 선택하면 전체 체크 또는 해제
   $('#all').click(function(){
@@ -102,19 +104,18 @@
     }
   });
 
-  //////////////체크박스////////////////
   // id log_button을 클릭하면, 함수발동
   $('#log_button').click(function(){
     // input 태그 중에 checkbox 타입 중에 name 이 chk 인 것만 log에 출력
     let $checkBoxes = $('input:checkbox[name=chk]');
     console.log(`체크박스 수 : ${$checkBoxes.length}`);   //백틱 주의!
 
-    //체크된 것만 골라라
+    //유효성 체크
     if($('input:checkbox[name=chk]:checked').length == 0){
       alert('선택 항목 없음.');
     } else {
       $('input[name=chk]:checked').each(function () {
-          console.log($(this).val());
+          console.log($(this).val());   //val로 값 가져오기
         });
       };
     });  //close => $('#log_button').click(function()

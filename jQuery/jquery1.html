@@ -14,7 +14,6 @@
     .big-text{
       font-size: xx-large;
     }
-
     .color-red {
       color: red;
     }
@@ -36,7 +35,6 @@
         console.log('클릭1');
       });
 
-
       // 1-2) jquery 방식 _ jquery는 무조건 jquery객체 반환 _ jquery객체 안에 정보가 들어감.
       $title = $('#title');
       console.log($title);
@@ -51,7 +49,6 @@
           console.log('JQuery(2) 클릭 1 !!');
         });
 
-
       //3. 메서드 체인_ jquerys는 항상 자기자신을 반환 _ 메서드를 계속 연결해서 사용
       $('#button2').click(function (){
         console.log('jquery 클릭2');
@@ -61,10 +58,9 @@
         console.log('jquery 마우스 떠나기2')
       });
 
-
       //4. innerHTML, innerTEXT대응
       //id button3을 클릭하면 함수 발동
-      //함수 내용은 class text의 내용 변경
+      //함수 내용은 id text의 내용 변경
       $('#button3').click(function(){
         $('#text').html('<b>b 태그</b>');
       });
@@ -89,7 +85,6 @@
     });
   });
   </script>
-
   <div id="title">title</div>
   <button id="button1">클릭</button>
   <button id="button2">클릭2</button>
@@ -103,6 +98,5 @@
 
   <!-- 엘리먼트 옵션 변경 -->
   <div id="text3" class="big-text">big-text</div>
-
 </body>
 </html>
