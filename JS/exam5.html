@@ -5,75 +5,120 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>실습5</title>
-</head>
-<body align="center">
-  <!-- 220531화 -->
-  <!-- 버튼 색 변화시키기 : 버튼 위치, 버튼 색, 글자색 등 -->
-  <!-- 원리 : 한 개 함수가 3개 버튼에 효과_onmouseover -->
-  <style>
-    /* 컨테이너로 전체위치 설정 */
-    .container{
-      width: 100%;
-      height: 100%;
-      line-height: 30vh;
-    }
 
-    /* 버튼 크기, 색, 간격 조정 */
-    button {
-      background-color:grey;
-      color: white;
+  <!-- 2022.06.02.목 -->
+  <!-- 오후 실습2 - form-->
+  <!-- 조건 : 확인 옆 체크박스가 체크되면 모두선택, 체크안되면 모두해제 -->
+  <!-- jquery 스크립트 import -->
+  <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+</head>
+<body>
+  <!-- 태그 빠르게 생성하는 꿀팁 : table>tr*7>td*3 -->
+  <style>
+    /* 여러개 묶어서 스타일 지정할 때는 콤마 사용 */
+    table, tr, th, td{
+      border: 1px black solid;      /*테두리 두께, 색, 디자인*/
+    }
+    table{
+      width: 600px;
+      text-align: center;      
+    }
+    tr{
+      width: 300px;
+    }
+    #chk{
+      width: 70px;
+      text-align: center;
+    }
+    #td2{
       width: 200px;
-      height: 50px;
-      font-size:larger;
-      font-family: bold;
-      margin: 1vw;
+    }
+    #td3{
+      width: 100px;
+    }
+    #log_button{
+      position: absolute;
+      width: 100px;
+      height: 40px;
+      left: 508px;
     }
   </style>
+  <table cellspacing="0px" cellpadding="5px">
+    <!-- 제목 -->
+    <tr id="tr">
+      <th>
+        <input type="checkbox" name="all" id="all">확인
+      </th>
+      <th>제목</th>
+      <th>글쓴시간</th>
+    </tr>
+    <!-- 동일한 name을 부여, selector한번에 사용 -->
+    <tr>
+      <td id="chk"><input type="checkbox" name="chk"  value="111"></td>
+      <td id="td2">111</td>
+      <td id="td3">13:12:01</td>
+    </tr>
+    <tr>
+      <td id="chk"><input type="checkbox" name="chk"   value="222"></td>
+      <td id="td2">222</td>
+      <td id="td3">13:12:02</td>
+    </tr>
+    <tr>
+      <td id="chk"><input type="checkbox" name="chk"  value="333"></td>
+      <td id="td2">333</td>
+      <td id="td3">13:12:03</td>
+    </tr>
+    <tr>
+      <td id="chk"><input type="checkbox" name="chk"  value="444"></td>
+      <td id="td2">444</td>
+      <td id="td3">13:12:04</td>
+    </tr>
+    <tr>
+      <td id="chk"><input type="checkbox" name="chk"  value="555"></td>
+      <td id="td2">555</td>
+      <td id="td3">13:12:05</td>
+    </tr>
+    <tr>
+      <td id="chk"><input type="checkbox" name="chk"v  value="666"></td>
+      <td id="td2">666</td>
+      <td id="td3">13:12:06</td>
+    </tr>
+  </table>
+  <div>
+    <input id="log_button" type="button" value="로그">
+  </div>
+<script>
+  //확인 옆 체크박스 선택하면 전체 체크 또는 해제
+  $('#all').click(function(){
+    //체크된 체크박스의 개수
+    //input태그 중 타입이 checkbox인 것중 name이 chk이면서 checked된 상태인 것의 개수(length)
+    let $checkBoxes = $('input:checkbox[name=chk]:checked').length;
 
-  <script>
-    // 버튼 생성
-    document.write("<div class = 'container'>");
-    document.write("<button id='html' onmouseover='changeHtml()'>html</button>");
-    document.write("<button id='CSS' onmouseover='changeCSS()'>CSS</button>");
-    document.write("<button id='js' onmouseover='changeJs()'>javascript</button>");
-    document.write("</div>")
+    //체크박스가 하나도 체크되어있지 않은 상태에서
+    if($checkBoxes === 0){
+      $('input:checkbox[name=chk]').prop("checked",true);
+      console.log('전체 체크');
+    } else{
+      $('input:checkbox[name=chk]').prop("checked",false);
+      console.log('전체 체크해제');
+    }
+  });
 
-    //DOM 객체 생성 _ $ 이 DOM객체를 의미한다.
-    let $html = document.getElementById('html');     //이 문서에서 Id가 html인 요소를 받아온다.
-    let $CSS = document.getElementById('CSS');
-    let $js = document.getElementById('js');
+  // id log_button을 클릭하면, 함수발동
+  $('#log_button').click(function(){
+    // input 태그 중에 checkbox 타입 중에 name 이 chk 인 것만 log에 출력
+    let $checkBoxes = $('input:checkbox[name=chk]');
+    console.log(`체크박스 수 : ${$checkBoxes.length}`);   //백틱 주의!
 
-    ////////////버튼 스타일 변경 함수/////////////
-    //html 버튼
-    function changeHtml() { 
-      $html.style.color = 'black';   //함수 작동시 HTML 버튼 글자색을 검정색으로 변경
-      $html.style.backgroundColor = 'white';      //함수 작동시 HTML 버튼 배경색은 흰색으로 변경
-      //나머지 버튼에 대한 처리
-      $CSS.style.color = 'white';   //흰 글자
-      $CSS.style.backgroundColor = 'grey';    //회색 배경
-      $js.style.color = 'white';    //흰 글자
-      $js.style.backgroundColor = 'grey';   //회색 배경
-    }
-     //CSS 버튼
-    function changeCSS() { 
-      $CSS.style.color = 'black';
-      $CSS.style.backgroundColor = 'white';
-      //나머지 버튼에 대한 처리      
-      $html.style.color = 'white';
-      $html.style.backgroundColor = 'grey';
-      $js.style.color = 'white';
-      $js.style.backgroundColor = 'grey';
-    }
-    //js 버튼
-    function changeJs() { 
-      $js.style.color = 'black';
-      $js.style.backgroundColor = 'white';
-       //나머지 버튼에 대한 처리     
-      $html.style.color = 'white';
-      $html.style.backgroundColor = 'grey';
-      $CSS.style.color = 'white';
-      $CSS.style.backgroundColor = 'grey';
-    }
-  </script>
+    //유효성 체크
+    if($('input:checkbox[name=chk]:checked').length == 0){
+      alert('선택 항목 없음.');
+    } else {
+      $('input[name=chk]:checked').each(function () {
+          console.log($(this).val());   //val로 값 가져오기
+        });
+      };
+    });  //close => $('#log_button').click(function()
+</script>
 </body>
 </html>
